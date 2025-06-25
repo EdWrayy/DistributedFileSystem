@@ -78,6 +78,7 @@ java Client <controller_port> <timeout_ms>
 - `Controller → Client`: `LIST <file_list>`
 
 ### Rebalance
+Handled internally by the Controllers and DStores, clients do not interact with this protocol.
 - Controller periodically or upon Dstore join:
   - Requests file lists from Dstores
   - Computes moves to maintain replication and balance
