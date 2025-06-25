@@ -1,4 +1,4 @@
-# DistributedFileSystem
+# Distributed File System
 
 This project implements a distributed file system in Java. The system consists of:
 
