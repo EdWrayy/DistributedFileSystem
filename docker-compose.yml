@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  controller:
+    build: .
+    container_name: dfs-controller
+    command: ["java", "Controller", "5000", "2", "5000", "30"]
+    ports:
+      - "5000:5000"
+
+  dstore1:
+    image: dfs-java:latest
+    container_name: dfs-dstore1
+    depends_on:
+      - controller
+    command: ["java", "Dstore", "6001", "5000", "5000", "/data"]
+    environment:
+      - CONTROLLER_HOST=controller
+    volumes:
+      - dstore1-data:/data
+
+  dstore2:
+    image: dfs-java:latest
+    container_name: dfs-dstore2
+    depends_on:
+      - controller
+    command: ["java", "Dstore", "6002", "5000", "5000", "/data"]
+    environment:
+      - CONTROLLER_HOST=controller
+    volumes:
+      - dstore2-data:/data
+
+volumes:
+  dstore1-data:
+  dstore2-data:

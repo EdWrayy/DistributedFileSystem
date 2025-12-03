@@ -49,7 +49,8 @@ public class Dstore {
             }
 
             //Send join to the controller, then begin listening to it on a single socket
-            controllerSocket = new Socket("localhost", cport);
+            String controllerHost = System.getenv().getOrDefault("CONTROLLER_HOST", "localhost");
+            controllerSocket = new Socket(controllerHost, cport);
             ctrlOut = new PrintWriter(controllerSocket.getOutputStream(), true);
             sendToController("JOIN " + port);
             System.out.println("[Dstore] Sent JOIN " + port);
